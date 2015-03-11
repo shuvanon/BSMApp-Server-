@@ -31,6 +31,15 @@ public class BSMServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		PrintWriter out= response.getWriter();
 		out.println("tuman");
+		String a="tum";		
+		switch (a) {
+		case "":
+			
+			break;
+
+		default:
+			break;
+		}
 	}
 
 	/**
