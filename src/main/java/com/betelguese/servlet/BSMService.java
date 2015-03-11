@@ -32,7 +32,7 @@ public class BSMService extends HttpServlet {
 			HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		PrintWriter out = response.getWriter();
-		out.println("ok");
+		out.println("okkkk");
 	}
 
 	/**
