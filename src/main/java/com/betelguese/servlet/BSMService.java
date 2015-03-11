@@ -1,4 +1,4 @@
-package main.java;
+package main.java.com.betelguese.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
