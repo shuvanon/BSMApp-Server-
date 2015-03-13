@@ -12,6 +12,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import main.java.com.betelguese.services.LogInService;
+import main.java.com.betelguese.services.SearchService;
 import main.java.com.betelguese.services.ServiceTag;
 import main.java.com.betelguese.utils.helpers.Log;
 import main.java.com.betelguese.utils.json.builders.Message;
@@ -48,13 +49,13 @@ public class RequestService implements LogInRequest, TransactionRequest,
 			if (searchKey == null || searchValue == null) {
 				return lessParamClientRequest(requestName);
 			} else {
-				// SearchService searchService = new SearchService();
-				return null;
-				// return searchService.seachBooks(searchKey, searchValue);
+				SearchService searchService = new SearchService();
+				return searchService.seachBooks(searchKey, searchValue);
 			}
-		}  catch (NullPointerException e) {
+		} catch (NullPointerException e) {
 			Log.e(TAG, "Error to get params", e);
-			return lessParamClientRequest(requestName);		}
+			return lessParamClientRequest(requestName);
+		}
 	}
 
 	public String updateRequest(String requestName, HttpServletRequest request) {
