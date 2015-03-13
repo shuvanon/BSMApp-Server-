@@ -24,6 +24,7 @@ public class BSMService extends HttpServlet {
 	 */
 	public BSMService() {
 		super();
+		requestProcess= new HttpRequestProcess();
 	}
 
 	/**
