@@ -67,7 +67,6 @@ public class LogInService implements ServiceTag {
 	 * @param userName
 	 * @param password
 	 * @return the JSON with successful on unsuccessful message
-	 * @throws JSONException
 	 */
 	public String logInValidity(final String userName, final String password) {
 		DatabaseService databaseService = new DatabaseService();

@@ -2,8 +2,6 @@ package main.java.com.betelguese.utils;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.json.JSONException;
-
 import main.java.com.betelguese.utils.RequestName.LogInRequest;
 import main.java.com.betelguese.utils.RequestName.ReportRequest;
 import main.java.com.betelguese.utils.RequestName.SearchRequest;
@@ -54,18 +52,9 @@ public class RequestService implements LogInRequest, TransactionRequest,
 				return null;
 				// return searchService.seachBooks(searchKey, searchValue);
 			}
-		} catch (JSONException e) {
-			Log.e(TAG, "Error to create json object.", e);
-			return JSONBuilder.handMadeJSONObject();
-		} catch (NullPointerException e) {
-			try {
-				Log.e(TAG, "Error to get params", e);
-				return lessParamClientRequest(requestName);
-			} catch (JSONException e1) {
-				Log.e(TAG, "Error to create json object.", e);
-				return JSONBuilder.handMadeJSONObject();
-			}
-		}
+		}  catch (NullPointerException e) {
+			Log.e(TAG, "Error to get params", e);
+			return lessParamClientRequest(requestName);		}
 	}
 
 	public String updateRequest(String requestName, HttpServletRequest request) {
