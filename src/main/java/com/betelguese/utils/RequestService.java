@@ -50,7 +50,7 @@ public class RequestService implements LogInRequest, TransactionRequest,
 				return lessParamClientRequest(requestName);
 			} else {
 				SearchService searchService = new SearchService();
-				return searchService.seachBooks(searchKey, searchValue);
+				return searchService.searchBooks(searchKey, searchValue);
 			}
 		} catch (NullPointerException e) {
 			Log.e(TAG, "Error to get params", e);

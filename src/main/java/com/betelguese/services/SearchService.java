@@ -29,7 +29,7 @@ public class SearchService implements SearchRequest, ServiceTag {
 	/**
 	 * TAG for the client receive service JSON.
 	 */
-	private static final String REQUEST_NAME = RequestName.UPDATE_REQUEST;
+	private static final String REQUEST_NAME = RequestName.SEARCH_REQUEST;
 
 	private DatabaseService databaseService;
 	private ResultSet resultSet;
@@ -38,7 +38,7 @@ public class SearchService implements SearchRequest, ServiceTag {
 
 	}
 
-	public String seachBooks(String key, String value) {
+	public String searchBooks(String key, String value) {
 		databaseService = new DatabaseService();
 
 		try {
