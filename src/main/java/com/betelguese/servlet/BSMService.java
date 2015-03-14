@@ -24,7 +24,7 @@ public class BSMService extends HttpServlet {
 	 */
 	public BSMService() {
 		super();
-		requestProcess= new HttpRequestProcess();
+		requestProcess = new HttpRequestProcess();
 	}
 
 	/**
@@ -42,7 +42,8 @@ public class BSMService extends HttpServlet {
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html;charset=UTF-8");
-		String serverProcessedService= requestProcess.getRequestProcess(request, response);
+		String serverProcessedService = requestProcess.getRequestProcess(
+				request, response);
 		PrintWriter out = response.getWriter();
 		out.println(serverProcessedService);
 	}
@@ -62,7 +63,8 @@ public class BSMService extends HttpServlet {
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html;charset=UTF-8");
-		String serverProcessedService= requestProcess.postRequestProcess(request, response);
+		String serverProcessedService = requestProcess.postRequestProcess(
+				request, response);
 		PrintWriter out = response.getWriter();
 		out.println(serverProcessedService);
 	}

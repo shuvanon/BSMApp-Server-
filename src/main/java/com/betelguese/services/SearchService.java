@@ -44,7 +44,7 @@ public class SearchService implements SearchRequest, ServiceTag {
 		try {
 			if (key.equals(SEARCH_BY_BOOK_ID_PARAM)) {
 				return searchByBookId(value);
-			} else if (key.equals(SEARCH_BY_BOOK_ID_PARAM)) {
+			} else if (key.equals(SEARCH_BY_BOOK_PARAM)) {
 				return searchByBookName(value);
 			} else if (key.equals(SEARCH_BY_AUTHOR_PARAM)) {
 				return searchByAuthor(value);
