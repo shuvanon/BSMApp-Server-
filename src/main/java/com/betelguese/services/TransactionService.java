@@ -34,10 +34,7 @@ public class TransactionService implements ServiceTag, TransactionRequest {
 	}
 
 	public String getService(String key, String value) {
-		databaseService = new DatabaseService("root", "root",
-				"com.mysql.jdbc.Driver",
-				"jdbc:mysql://localhost:3306/sustsa_book_store");
-
+		databaseService = new DatabaseService();
 		if (key.equals(GET_BOOKS_SERVICE)) {
 			return getBooks(value);
 		} else if (key.equals(ADD_TRANSACTION_SERVICE)) {
