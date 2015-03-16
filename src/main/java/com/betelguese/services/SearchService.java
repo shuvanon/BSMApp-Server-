@@ -5,8 +5,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.json.JSONException;
-
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -173,7 +171,7 @@ public class SearchService implements SearchRequest, ServiceTag {
 	}
 
 	private List<SearchResult> createSearchResult(ResultSet resultSet)
-			throws SQLException, JSONException {
+			throws SQLException {
 		List<SearchResult> searchResult = new ArrayList<SearchResult>();
 		SearchResult result;
 		do {

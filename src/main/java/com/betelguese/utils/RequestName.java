@@ -29,17 +29,21 @@ public interface RequestName {
 		public static final String UPDATE_SEARCH_PARAM = "updateSearch";
 	}
 
-	public interface TransactionRequest{
-		public static final String SERVICE_KEY_PARAM="serviceKey";
-		public static final String SERVICE_VALUE_PARAM="serviceValue";
+	public interface TransactionRequest {
+		public static final String SERVICE_KEY_PARAM = "serviceKey";
+		public static final String SERVICE_VALUE_PARAM = "serviceValue";
+		public static final String GET_BOOKS_SERVICE = "getBooks";
+		public static final String ADD_TRANSACTION_SERVICE = "addTransaction";
+		public static final String GET_TRANSACTION_ID_SERVICE = "getTransactionId";
 	}
-	
-	public interface ReportRequest{
-		public static final String SERVICE_PARAM="service";
+
+	public interface ReportRequest {
+		public static final String SERVICE_PARAM = "service";
 	}
+
 	public interface SearchRequest {
-		public static final String SEARCH_KEY_PARAM="searchKey";
-		public static final String SEARCH_VALUE_PARAM="searchValue";
+		public static final String SEARCH_KEY_PARAM = "searchKey";
+		public static final String SEARCH_VALUE_PARAM = "searchValue";
 		public static final String SEARCH_BY_BOOK_ID_PARAM = "searchByBookId";
 		public static final String SEARCH_BY_BOOK_PARAM = "searchByBook";
 		public static final String SEARCH_BY_AUTHOR_PARAM = "searchByAuthor";

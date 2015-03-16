@@ -114,6 +114,26 @@ public final class DBQuery implements Table, Column, Keyword {
 	 * @return
 	 */
 	public static final String updateScreenSearch(final String value) {
+		return commonSearch(value);
+	}
+
+	/**
+	 * 
+	 * @param key
+	 * @param value
+	 * @return
+	 */
+	public static final String transactionScreenSearch(final String value) {
+		return commonSearch(value);
+	}
+
+	/**
+	 * 
+	 * @param key
+	 * @param value
+	 * @return
+	 */
+	public static final String commonSearch(final String value) {
 		return SELECT_ALL + BOOKS_TABLE + NATURAL + JOIN + DISPLAY_TABLE + JOIN
 				+ PUBLISHER_TABLE + USING + buildFunctionString(PUBLISHER_ID)
 				+ JOIN + SUPPLIED_BOOKS_TABLE + USING
@@ -419,7 +439,8 @@ public final class DBQuery implements Table, Column, Keyword {
 
 	public static String updateTransactedBooks(String booksId, String quantity) {
 		// TODO Auto-generated method stub
-		return "update books set books_total_stock=books_total_stock-"+quantity+" where books_id=+"+booksId+";";
+		return "update books set books_total_stock=books_total_stock-"
+				+ quantity + " where books_id=+" + booksId + ";";
 	}
 
 	public static String getMaxMinYear() {
@@ -429,6 +450,7 @@ public final class DBQuery implements Table, Column, Keyword {
 
 	public static String getYearTransactions(int year) {
 		// TODO Auto-generated method stub
-		return "select sum(total_price) as total from transactions where transactions_date like '"+year+"%';";
-	}	
+		return "select sum(total_price) as total from transactions where transactions_date like '"
+				+ year + "%';";
+	}
 }

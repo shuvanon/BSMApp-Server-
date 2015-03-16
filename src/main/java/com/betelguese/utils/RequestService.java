@@ -14,6 +14,7 @@ import com.google.gson.GsonBuilder;
 import main.java.com.betelguese.services.LogInService;
 import main.java.com.betelguese.services.SearchService;
 import main.java.com.betelguese.services.ServiceTag;
+import main.java.com.betelguese.services.TransactionService;
 import main.java.com.betelguese.utils.helpers.Log;
 import main.java.com.betelguese.utils.json.builders.Message;
 
@@ -126,9 +127,8 @@ public class RequestService implements LogInRequest, TransactionRequest,
 			if (serviceKey == null && serviceValue == null) {
 				return lessParamClientRequest(requestName);
 			} else {
-				// TransactionService service = new TransactionService();
-				return null;
-				// return service.getService(serviceKey, serviceValue);
+				TransactionService service = new TransactionService();
+				return service.getService(serviceKey, serviceValue);
 			}
 		} catch (NullPointerException e) {
 			Log.e(TAG, "Error to get params", e);
