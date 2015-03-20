@@ -49,7 +49,6 @@ public class TransactionService implements ServiceTag, TransactionRequest {
 	private String addTransaction(String string) {
 		JSONObject jsonObject;
 		try {
-			System.err.println(string);
 			jsonObject = new JSONObject(string);
 			final String customerName = jsonObject.getString("customerName");
 			final String customerNumber = jsonObject
