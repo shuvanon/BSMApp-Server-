@@ -67,8 +67,7 @@ public class TransactionService implements ServiceTag, TransactionRequest {
 				updateBooks(booksId, quantity);
 
 			}
-			System.err.println("ok");
-			return "ok";
+			return serviceSuccesful();
 		} catch (InstantiationException e) {
 			e.printStackTrace();
 			return serverErrorMessage(e);
@@ -82,6 +81,14 @@ public class TransactionService implements ServiceTag, TransactionRequest {
 			e.printStackTrace();
 			return serverErrorMessage(e);
 		}
+	}
+
+	private String serviceSuccesful() {
+		ServiceMessage serviceMessage = new ServiceMessage(1,
+				MessageBuilder.messageBuilder(SUCCESS_SERVICE, REQUEST_NAME),
+				REQUEST_NAME);
+		Gson gson = new GsonBuilder().create();
+		return gson.toJson(serviceMessage);
 	}
 
 	private void updateBooks(String booksId, String quantity) {
