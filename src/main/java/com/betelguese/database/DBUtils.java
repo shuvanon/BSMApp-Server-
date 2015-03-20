@@ -19,6 +19,14 @@ interface DBUtils {
 				+ "supply";
 		public static final String SUPPLIED_BOOKS_TABLE = Schema.DATABASE + "."
 				+ "supplied_books";
+
+		public static final String TRANSACTION_TABLE = Schema.DATABASE + "."
+				+ "transactions";
+
+		public static final String BOOKS_HAS_TRANSACTION_TABLE = Schema.DATABASE
+				+ "." + "books_has_transactions";
+		public static final String CUSTOMER_TABLE = Schema.DATABASE + "."
+				+ "customer";
 	}
 
 	public interface Column {
@@ -56,10 +64,21 @@ interface DBUtils {
 		//
 		public static final String QUANTITY = "quantity";
 
+		// transaction table column
+		public static final String TRANSACTION_ID = "transaction_id";
+
+		// customer table column
+		public static final String CUSTOMER_ID = "customer_id";
+		public static final String CUSTOMER_NAME = "customer_name";
+		public static final String CUSTOMER_MOBILE = "customer_mobile";
+		
+		// books_has_transaction table column
+		public static final String DISCOUNT = "discount";
+
 	}
 
 	public interface Keyword {
-		
+
 		public static final String UPDATE = "UPDATE ";
 		public static final String SELECT = "SELECT ";
 		public static final String MAX = "MAX";
@@ -79,7 +98,7 @@ interface DBUtils {
 		public static final String HAVING = " HAVING";
 		public static final String EQUAL_TO = " = ";
 		public static final String AND = " AND ";
-		public static final String SET=" SET ";
+		public static final String SET = " SET ";
 		public static final String OR = " OR ";
 		public static final String STRING_END = " ;";
 		public static final String COLUMN = " COLUMN ";

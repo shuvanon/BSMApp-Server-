@@ -200,7 +200,7 @@ public final class DBQuery implements Table, Column, Keyword {
 
 	public static String getDisplayId(String displayShelf,
 			String displayColumn, String displayRow) {
-		// TODO Auto-generated method stub
+
 		return buildSelectString(DISPLAY_ID) + DISPLAY_TABLE + WHERE
 				+ DISPLAY_SHELF + EQUAL_TO
 				+ buildEqualCheckString(displayShelf) + AND + DISPLAY_COLUMN
@@ -211,7 +211,7 @@ public final class DBQuery implements Table, Column, Keyword {
 
 	public static String getSupplyID(String totalPrice, String totalPaid,
 			String administratorId, String publisherId) {
-		// TODO Auto-generated method stub
+
 		return buildSelectString(SUPPLY_ID) + SUPPLY_TABLE + WHERE
 				+ TOTAL_PRICE + LIKE + buildEqualCheckString(totalPrice) + AND
 				+ TOTAL_PAID + LIKE + buildEqualCheckString(totalPaid) + AND
@@ -244,7 +244,7 @@ public final class DBQuery implements Table, Column, Keyword {
 
 	public static String insertSuppliedBookTable(String supplyId,
 			String booksId, String publisherId, String booksTotalStock) {
-		// TODO Auto-generated method stub
+
 		return INSERT
 				+ SUPPLIED_BOOKS_TABLE
 				+ buildInsertString(SUPPLY_ID, BOOKS_ID, PUBLISHER_ID, QUANTITY)
@@ -256,7 +256,7 @@ public final class DBQuery implements Table, Column, Keyword {
 	public static String insertIntoBooksTable(String booksId, String booksName,
 			String booksAuthor, String booksISBN, String publisherId,
 			String individualPrice, String booksTotalStock, String displayId) {
-		// TODO Auto-generated method stub
+
 		return INSERT
 				+ BOOKS_TABLE
 				+ buildInsertString(BOOKS_ID, BOOKS_NAME, BOOKS_AUTHOR,
@@ -297,6 +297,120 @@ public final class DBQuery implements Table, Column, Keyword {
 
 	/**
 	 * 
+	 * @return
+	 */
+	public static String getMaxBooksId() {
+		return SELECT + MAX + buildFunctionString(BOOKS_ID) + AS + " "
+				+ "maxId" + FROM + BOOKS_TABLE + STRING_END;
+	}
+
+	/**
+	 * 
+	 * @param booksId
+	 * @param booksTotalStock
+	 * @param displayId
+	 * @return
+	 */
+	public static String updateBooks(String booksId, String booksTotalStock,
+			String displayId) {
+		return UPDATE + BOOKS_TABLE + SET + BOOKS_TOTAL_STOCK + EQUAL_TO
+				+ buildEqualCheckString(booksTotalStock) + BOOKS_TOTAL_STOCK
+				+ DISPLAY_ID + EQUAL_TO + buildEqualCheckString(displayId)
+				+ WHERE + BOOKS_ID + EQUAL_TO + buildEqualCheckString(booksId)
+				+ STRING_END;
+	}
+
+	/**
+	 * 
+	 * @param value
+	 * @return
+	 */
+	public static String transactionId(String value) {
+		return SELECT + MAX + buildFunctionString(TRANSACTION_ID)
+				+ builsAs(TRANSACTION_ID) + FROM + TRANSACTION_TABLE + WHERE
+				+ TRANSACTION_ID + LIKE + "'" + value + "%'" + STRING_END;
+	}
+
+	/**
+	 * 
+	 * @param customerName
+	 * @param customerNumber
+	 * @return
+	 */
+	public static String customerId(String customerName, String customerNumber) {
+		return buildSelectString(CUSTOMER_ID) + CUSTOMER_TABLE + WHERE
+				+ CUSTOMER_NAME + EQUAL_TO
+				+ buildEqualCheckString(customerName) + AND + CUSTOMER_MOBILE
+				+ EQUAL_TO + buildEqualCheckString(customerNumber) + STRING_END;
+	}
+
+	/**
+	 * 
+	 * @param customerName
+	 * @param customerNumber
+	 * @return
+	 */
+	public static String addCustomer(String customerName, String customerNumber) {
+		return INSERT + CUSTOMER_TABLE
+				+ buildInsertString(CUSTOMER_NAME, CUSTOMER_MOBILE) + VALUES
+				+ buildInsertValueString(customerName, customerNumber)
+				+ STRING_END;
+	}
+
+	/**
+	 * 
+	 * @param trasactionId
+	 * @param customerId
+	 * @param adminId
+	 * @param totalPaid
+	 * @return
+	 */
+	public static String createTransaction(String trasactionId,
+			String customerId, String adminId, String totalPaid) {
+		return INSERT
+				+ TRANSACTION_TABLE
+				+ buildInsertString(TRANSACTION_ID, TOTAL_PRICE,
+						ADMINISTRATOR_ID, CUSTOMER_ID)
+				+ VALUES
+				+ buildInsertValueString(trasactionId, totalPaid, adminId,
+						customerId) + STRING_END;
+	}
+
+	/**
+	 * 
+	 * @param booksId
+	 * @param trasactionId
+	 * @param quantity
+	 * @return
+	 */
+	public static String addBooksTransaction(String booksId,
+			String transactionId, String quantity) {
+		return INSERT
+				+ BOOKS_HAS_TRANSACTION_TABLE
+				+ buildInsertString(BOOKS_ID, TRANSACTION_ID, QUANTITY,
+						DISCOUNT) + VALUES
+				+ buildInsertValueString(booksId, transactionId, quantity, "0")
+				+ STRING_END;
+	}
+
+	public static String updateTransactedBooks(String booksId, String quantity) {
+		return UPDATE + BOOKS_TABLE + SET + BOOKS_TOTAL_STOCK + EQUAL_TO
+				+ buildEqualCheckString(BOOKS_TOTAL_STOCK + "-" + quantity)
+				+ WHERE + BOOKS_ID + EQUAL_TO + buildEqualCheckString(booksId)
+				+ STRING_END;
+	}
+
+	public static String getMaxMinYear() {
+		return "select max(transactions_date) as max_year,min(transactions_date) as min_year from transactions;";
+	}
+
+	public static String getYearTransactions(int year) {
+		return "select sum(total_price) as total from transactions where transactions_date like '"
+				+ year + "%';";
+	}
+
+	/**
+	 * 
 	 * @param string
 	 * @return
 	 */
@@ -311,6 +425,15 @@ public final class DBQuery implements Table, Column, Keyword {
 	 */
 	private static final String buildEqualCheckString(final String string) {
 		return String.format(" '%s' ", string);
+	}
+
+	/**
+	 * 
+	 * @param string
+	 * @return
+	 */
+	private static final String builsAs(final String string) {
+		return String.format(AS + " %s", string);
 	}
 
 	/**
@@ -354,7 +477,7 @@ public final class DBQuery implements Table, Column, Keyword {
 				stringBuilder.append(COMMA);
 			}
 		}
-		stringBuilder.append(")");
+		stringBuilder.append(") ");
 		return stringBuilder.toString();
 	}
 
@@ -372,85 +495,7 @@ public final class DBQuery implements Table, Column, Keyword {
 				stringBuilder.append(COMMA);
 			}
 		}
-		stringBuilder.append(")");
+		stringBuilder.append(") ");
 		return stringBuilder.toString();
-	}
-
-	public static String getMaxBooksId() {
-		// TODO Auto-generated method stub
-		System.out.println(SELECT + MAX + buildFunctionString(BOOKS_ID) + AS
-				+ "maxId" + FROM + BOOKS_TABLE);
-		return SELECT + MAX + buildFunctionString(BOOKS_ID) + AS + " "
-				+ "maxId" + FROM + BOOKS_TABLE;
-	}
-
-	public static String updateBooks(String booksId, String booksTotalStock,
-			String displayId) {
-		return UPDATE + BOOKS_TABLE + SET + BOOKS_TOTAL_STOCK + EQUAL_TO
-				+ buildEqualCheckString(booksTotalStock) + BOOKS_TOTAL_STOCK
-				+ DISPLAY_ID + EQUAL_TO + buildEqualCheckString(displayId)
-				+ WHERE + BOOKS_ID + EQUAL_TO + buildEqualCheckString(booksId)
-				+ STRING_END;
-	}
-
-	public static String transactionId(String value) {
-		// TODO Auto-generated method stub
-		return "SELECT max(transaction_id) as transaction_id FROM transactions WHERE transaction_id like "
-				+ "'" + value + "%'";
-	}
-
-	public static String customerId(String customerName, String customerNumber) {
-		// TODO Auto-generated method stub
-		return "select customer_id from customer where customer_name='"
-				+ customerName + "' and customer_mobile='" + customerNumber
-				+ "'";
-	}
-
-	public static String addCustomer(String customerName, String customerNumber) {
-		// TODO Auto-generated method stub
-		return "insert into customer (customer_name,customer_mobile) values ('"
-				+ customerName + "','" + customerNumber + "');";
-	}
-
-	public static String createTransaction(String trasactionId,
-			String customerId, String adminId, String totalPaid) {
-		// TODO Auto-generated method stub
-		return "insert into transactions (transaction_id, total_price, administrator_id, customer_id) values('"
-				+ trasactionId
-				+ "','"
-				+ totalPaid
-				+ "','"
-				+ adminId
-				+ "','"
-				+ customerId + "');";
-	}
-
-	public static String addBooksTransaction(String booksId,
-			String trasactionId, String quantity) {
-		// TODO Auto-generated method stub
-		return "INSERT INTO `bsmapp`.`books_has_transactions` (`books_id`, `transactions_id`, `quantity`, `discount`) VALUES ('"
-				+ booksId
-				+ "', '"
-				+ trasactionId
-				+ "', '"
-				+ quantity
-				+ "', '0');";
-	}
-
-	public static String updateTransactedBooks(String booksId, String quantity) {
-		// TODO Auto-generated method stub
-		return "update books set books_total_stock=books_total_stock-"
-				+ quantity + " where books_id=+" + booksId + ";";
-	}
-
-	public static String getMaxMinYear() {
-		// TODO Auto-generated method stub
-		return "select max(transactions_date) as max_year,min(transactions_date) as min_year from transactions;";
-	}
-
-	public static String getYearTransactions(int year) {
-		// TODO Auto-generated method stub
-		return "select sum(total_price) as total from transactions where transactions_date like '"
-				+ year + "%';";
 	}
 }
