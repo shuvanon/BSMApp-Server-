@@ -428,7 +428,7 @@ public final class DBQuery implements Table, Column, Keyword {
 	public static String addBooksTransaction(String booksId,
 			String trasactionId, String quantity) {
 		// TODO Auto-generated method stub
-		return "INSERT INTO `sustsa_book_store`.`books_has_transactions` (`books_id`, `transactions_id`, `quantity`, `discount`) VALUES ('"
+		return "INSERT INTO `bsmapp`.`books_has_transactions` (`books_id`, `transactions_id`, `quantity`, `discount`) VALUES ('"
 				+ booksId
 				+ "', '"
 				+ trasactionId
