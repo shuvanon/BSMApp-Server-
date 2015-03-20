@@ -50,13 +50,24 @@ public class TransactionService implements ServiceTag, TransactionRequest {
 		JSONObject jsonObject;
 		try {
 			jsonObject = new JSONObject(string);
+			// {requestName=transactionRequest,
+			// serviceValue={"customerName":"Sajid","customerNumber":"01680842208",
+			// "transactionId":"150320001","totalPaid":"280","adminId":"1",
+			// "transactionBooks":[{"booksId":"1","quantity":"2"}]},
+			// serviceKey=addTransaction}
+
 			final String customerName = jsonObject.getString("customerName");
+			System.out.println(customerName);
 			final String customerNumber = jsonObject
 					.getString("customerNumber");
-			final String trasactionId = jsonObject.getString("transactionId");
+			System.out.println(customerNumber);
+			final String transactionId = jsonObject.getString("transactionId");
+			System.out.println(transactionId);
 			final String totalPaid = jsonObject.getString("totalPaid");
+			System.out.println(totalPaid);
 			final String adminId = jsonObject.getString("adminId");
-			createTransactionInfo(customerName, customerNumber, trasactionId,
+			System.out.println(adminId);
+			createTransactionInfo(customerName, customerNumber, transactionId,
 					totalPaid, adminId);
 			JSONArray array = jsonObject.getJSONArray("transactionBooks");
 			databaseService.open();
@@ -64,11 +75,10 @@ public class TransactionService implements ServiceTag, TransactionRequest {
 				JSONObject object = array.getJSONObject(i);
 				final String booksId = object.getString("booksId");
 				final String quantity = object.getString("quantity");
-				createBookTransaction(booksId, trasactionId, quantity);
+				createBookTransaction(booksId, transactionId, quantity);
 				updateBooks(booksId, quantity);
 
 			}
-			databaseService.close();
 			System.err.println("ok");
 			return "ok";
 		} catch (InstantiationException e) {
