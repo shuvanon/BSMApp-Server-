@@ -50,7 +50,7 @@ public class TransactionService implements ServiceTag, TransactionRequest {
 			// serviceValue={"customerName":"Sajid","customerNumber":"01680842208",
 			// "transactionId":"150320001","totalPaid":"280","adminId":"1",
 			// "transactionBooks":[{"booksId":"1","quantity":"2"}]},
-			// serviceKey=addTransaction}
+			// serviceKey=addTransaction}.
 			Gson gson = new GsonBuilder().create();
 			TransactionInfo transactionInfo = gson.fromJson(string,
 					TransactionInfo.class);
