@@ -5,10 +5,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -19,6 +15,8 @@ import main.java.com.betelguese.utils.RequestName;
 import main.java.com.betelguese.utils.RequestName.TransactionRequest;
 import main.java.com.betelguese.utils.helpers.Log;
 import main.java.com.betelguese.utils.items.SearchResult;
+import main.java.com.betelguese.utils.items.TransactionBook;
+import main.java.com.betelguese.utils.items.TransactionInfo;
 import main.java.com.betelguese.utils.json.builders.SearchMessage;
 import main.java.com.betelguese.utils.json.builders.ServiceMessage;
 import main.java.com.betelguese.utils.json.builders.TransactionIdMessage;
@@ -47,35 +45,24 @@ public class TransactionService implements ServiceTag, TransactionRequest {
 	}
 
 	private String addTransaction(String string) {
-		JSONObject jsonObject;
 		try {
-			jsonObject = new JSONObject(string);
-			System.out.println(jsonObject.toString(1));
 			// {requestName=transactionRequest,
 			// serviceValue={"customerName":"Sajid","customerNumber":"01680842208",
 			// "transactionId":"150320001","totalPaid":"280","adminId":"1",
 			// "transactionBooks":[{"booksId":"1","quantity":"2"}]},
 			// serviceKey=addTransaction}
-
-			final String customerName = jsonObject.getString("customerName");
-			System.out.println(customerName);
-			final String customerNumber = jsonObject
-					.getString("customerNumber");
-			System.out.println(customerNumber);
-			final String transactionId = jsonObject.getString("transactionId");
-			System.out.println(transactionId);
-			final String totalPaid = jsonObject.getString("totalPaid");
-			System.out.println(totalPaid);
-			final String adminId = jsonObject.getString("adminId");
-			System.out.println(adminId);
-			createTransactionInfo(customerName, customerNumber, transactionId,
-					totalPaid, adminId);
-			JSONArray array = jsonObject.getJSONArray("transactionBooks");
+			Gson gson = new GsonBuilder().create();
+			TransactionInfo transactionInfo = gson.fromJson(string,
+					TransactionInfo.class);
+			createTransactionInfo(transactionInfo);
 			databaseService.open();
-			for (int i = 0; i < array.length(); i++) {
-				JSONObject object = array.getJSONObject(i);
-				final String booksId = object.getString("booksId");
-				final String quantity = object.getString("quantity");
+			String transactionId = transactionInfo.getTransactionId();
+			List<TransactionBook> transactionBooks = transactionInfo
+					.getTransactionBooks();
+			for (int i = 0; i < transactionBooks.size(); i++) {
+				TransactionBook transactionBook = transactionBooks.get(0);
+				final String booksId = transactionBook.getBooksId();
+				final String quantity = transactionBook.getQuantity();
 				createBookTransaction(booksId, transactionId, quantity);
 				updateBooks(booksId, quantity);
 
@@ -108,9 +95,12 @@ public class TransactionService implements ServiceTag, TransactionRequest {
 				trasactionId, quantity));
 	}
 
-	private void createTransactionInfo(String customerName,
-			String customerNumber, String trasactionId, String totalPaid,
-			String adminId) {
+	private void createTransactionInfo(TransactionInfo transactionInfo) {
+		String customerName = transactionInfo.getCustomerName();
+		String customerNumber = transactionInfo.getCustomerNumber();
+		String transactionId = transactionInfo.getTransactionId();
+		String totalPaid = transactionInfo.getTotalPaid();
+		String adminId = transactionInfo.getAdminId();
 		try {
 			databaseService.open();
 			resultSet = databaseService.executeQuery(DBQuery.customerId(
@@ -123,7 +113,7 @@ public class TransactionService implements ServiceTag, TransactionRequest {
 				resultSet.next();
 			}
 			String customerId = resultSet.getString("customer_id");
-			databaseService.execute(DBQuery.createTransaction(trasactionId,
+			databaseService.execute(DBQuery.createTransaction(transactionId,
 					customerId, adminId, totalPaid));
 			databaseService.close();
 		} catch (InstantiationException e) {
@@ -244,7 +234,7 @@ public class TransactionService implements ServiceTag, TransactionRequest {
 	}
 
 	private List<SearchResult> createSearchResult(ResultSet resultSet)
-			throws SQLException, JSONException {
+			throws SQLException {
 		/*
 		 * books_id,books_name,publisher_name,books_isbn,books_author,
 		 * books_total_stock
