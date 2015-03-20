@@ -69,7 +69,8 @@ public class TransactionService implements ServiceTag, TransactionRequest {
 
 			}
 			databaseService.close();
-
+			System.err.println("ok");
+			return "ok";
 		} catch (InstantiationException e) {
 			e.printStackTrace();
 			return serverErrorMessage(e);
@@ -83,7 +84,6 @@ public class TransactionService implements ServiceTag, TransactionRequest {
 			e.printStackTrace();
 			return serverErrorMessage(e);
 		}
-		return null;
 	}
 
 	private void updateBooks(String booksId, String quantity) {
