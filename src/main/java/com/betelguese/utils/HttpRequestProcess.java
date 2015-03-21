@@ -111,7 +111,7 @@ public class HttpRequestProcess implements RequestName {
 				return requestService.transactionRequest(requestName, request);
 			} else if (request.equals(UPDATE_REQUEST)) {
 				Log.d(TAG, UPDATE_REQUEST
-						+ " is called by the client application");
+						+ " is called by the client applicationn");
 				return requestService.updateRequest(requestName, request);
 
 			} else if (requestName.equals(REPORT_REQUEST)) {

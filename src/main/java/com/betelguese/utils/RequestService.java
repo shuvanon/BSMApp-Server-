@@ -68,7 +68,6 @@ public class RequestService implements LogInRequest, TransactionRequest,
 			final String maxId = request.getParameter(MAX_ID_PARAM);
 			final String updateSearch = request
 					.getParameter(UPDATE_SEARCH_PARAM);
-			System.out.println(maxId+" as");
 			if (addBooks == null && updateBooks == null && updateSearch == null
 					& maxId == null) {
 				Log.e(TAG, "no parameter got", new NullPointerException(
