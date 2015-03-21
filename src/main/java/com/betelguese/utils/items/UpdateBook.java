@@ -1,55 +1,67 @@
 package main.java.com.betelguese.utils.items;
 
-public class SearchResult {
+public class UpdateBook {
 
-	/*
-	 * books_id,books_name,publisher_name,books_isbn,books_author,
-	 * books_total_stock,display_id, display_shelf,display_column,display_row
-	 */
 	private String booksId;
 	private String booksName;
 	private String publisherName;
 	private String booksISBN;
 	private String booksAuthor;
 	private String booksTotalStock;
-	private String price;
-	private String displayId;
+	private String individualPrice;
 	private String displayShelf;
 	private String displayColumn;
 	private String displayRow;
+	private String comment;
+	private String totalPaid;
+	private String sellerName;
+	private String quantity;
+	private String adminId;
 
-	public SearchResult() {
-		this(null, null, null, null, null, null, null, null, null, null, null);
+	public UpdateBook() {
+		this(null, null, null, null, null, null, null, null, null, null, null,
+				null, null, null, null);
 	}
 
 	/**
+	 * 
 	 * @param booksId
 	 * @param booksName
 	 * @param publisherName
 	 * @param booksISBN
 	 * @param booksAuthor
 	 * @param booksTotalStock
-	 * @param price
+	 * @param individualPrice
 	 * @param displayId
 	 * @param displayShelf
 	 * @param displayColumn
 	 * @param displayRow
+	 * @param comment
+	 * @param totalPaid
+	 * @param sellerName
+	 * @param quantity
+	 * @param adminId
 	 */
-	public SearchResult(String booksId, String booksName, String publisherName,
+	public UpdateBook(String booksId, String booksName, String publisherName,
 			String booksISBN, String booksAuthor, String booksTotalStock,
-			String price, String displayId, String displayShelf,
-			String displayColumn, String displayRow) {
+			String individualPrice, String displayShelf, String displayColumn,
+			String displayRow, String comment, String totalPaid,
+			String sellerName, String quantity, String adminId) {
 		this.booksId = booksId;
 		this.booksName = booksName;
 		this.publisherName = publisherName;
 		this.booksISBN = booksISBN;
 		this.booksAuthor = booksAuthor;
 		this.booksTotalStock = booksTotalStock;
-		this.price = price;
-		this.displayId = displayId;
+		this.individualPrice = individualPrice;
 		this.displayShelf = displayShelf;
 		this.displayColumn = displayColumn;
 		this.displayRow = displayRow;
+		this.comment = comment;
+		this.totalPaid = totalPaid;
+		this.sellerName = sellerName;
+		this.quantity = quantity;
+		this.adminId = adminId;
 	}
 
 	/**
@@ -143,33 +155,18 @@ public class SearchResult {
 	}
 
 	/**
-	 * @return the price
+	 * @return the individualPrice
 	 */
-	public String getPrice() {
-		return price;
+	public String getIndividualPrice() {
+		return individualPrice;
 	}
 
 	/**
-	 * @param price
-	 *            the price to set
+	 * @param individualPrice
+	 *            the individualPrice to set
 	 */
-	public void setPrice(String price) {
-		this.price = price;
-	}
-
-	/**
-	 * @return the displayId
-	 */
-	public String getDisplayId() {
-		return displayId;
-	}
-
-	/**
-	 * @param displayId
-	 *            the displayId to set
-	 */
-	public void setDisplayId(String displayId) {
-		this.displayId = displayId;
+	public void setIndividualPrice(String individualPrice) {
+		this.individualPrice = individualPrice;
 	}
 
 	/**
@@ -217,6 +214,90 @@ public class SearchResult {
 		this.displayRow = displayRow;
 	}
 
+	/**
+	 * @return the comment
+	 */
+	public String getComment() {
+		return comment;
+	}
+
+	/**
+	 * @param comment
+	 *            the comment to set
+	 */
+	public void setComment(String comment) {
+		this.comment = comment;
+	}
+
+	/**
+	 * @return the totalPaid
+	 */
+	public String getTotalPaid() {
+		return totalPaid;
+	}
+
+	/**
+	 * @param totalPaid
+	 *            the totalPaid to set
+	 */
+	public void setTotalPaid(String totalPaid) {
+		this.totalPaid = totalPaid;
+	}
+
+	/**
+	 * @return the sellerName
+	 */
+	public String getSellerName() {
+		return sellerName;
+	}
+
+	/**
+	 * @param sellerName
+	 *            the sellerName to set
+	 */
+	public void setSellerName(String sellerName) {
+		this.sellerName = sellerName;
+	}
+
+	/**
+	 * @return the quantity
+	 */
+	public String getQuantity() {
+		return quantity;
+	}
+
+	/**
+	 * @param quantity
+	 *            the quantity to set
+	 */
+	public void setQuantity(String quantity) {
+		this.quantity = quantity;
+	}
+
+	public void setAdminId(String adminId) {
+		this.adminId = adminId;
+	}
+
+	public String getAdminId() {
+		return adminId;
+	}
+
+	/**
+	 * @param comment
+	 * @param totalPaid
+	 * @param sellerName
+	 * @param quantity
+	 * @param adminId
+	 */
+	public UpdateBook(String comment, String totalPaid, String sellerName,
+			String quantity, String adminId) {
+		this.comment = comment;
+		this.totalPaid = totalPaid;
+		this.sellerName = sellerName;
+		this.quantity = quantity;
+		this.adminId = adminId;
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -224,13 +305,9 @@ public class SearchResult {
 	 */
 	@Override
 	public String toString() {
-		return "SearchResult [booksId=" + booksId + ", booksName=" + booksName
-				+ ", publisherName=" + publisherName + ", booksISBN="
-				+ booksISBN + ", booksAuthor=" + booksAuthor
-				+ ", booksTotalStock=" + booksTotalStock + ", price=" + price
-				+ ", displayId=" + displayId + ", displayShelf=" + displayShelf
-				+ ", displayColumn=" + displayColumn + ", displayRow="
-				+ displayRow + "]";
+		return "UpdateSearchResult [comment=" + comment + ", totalPaid="
+				+ totalPaid + ", sellerName=" + sellerName + ", quantity="
+				+ quantity + ", adminName=" + adminId + "]";
 	}
 
 }
