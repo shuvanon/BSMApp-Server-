@@ -116,6 +116,7 @@ public class UpdateService implements ServiceTag, UpdateRequest {
 		} else {
 			updateBooks(resultSet.getString("books_id"), booksTotalStock,
 					displayId);
+			resultSet.next();
 		}
 		return resultSet.getString("books_id");
 	}

@@ -200,7 +200,12 @@ public final class DBQuery implements Table, Column, Keyword {
 
 	public static String getDisplayId(String displayShelf,
 			String displayColumn, String displayRow) {
-
+		System.out.println(buildSelectString(DISPLAY_ID) + DISPLAY_TABLE
+				+ WHERE + DISPLAY_SHELF + EQUAL_TO
+				+ buildEqualCheckString(displayShelf) + AND + DISPLAY_COLUMN
+				+ EQUAL_TO + buildEqualCheckString(displayColumn) + AND
+				+ DISPLAY_ROW + EQUAL_TO + buildEqualCheckString(displayRow)
+				+ STRING_END);
 		return buildSelectString(DISPLAY_ID) + DISPLAY_TABLE + WHERE
 				+ DISPLAY_SHELF + EQUAL_TO
 				+ buildEqualCheckString(displayShelf) + AND + DISPLAY_COLUMN
@@ -270,6 +275,12 @@ public final class DBQuery implements Table, Column, Keyword {
 
 	public static String insertIntoDisplayTable(String displayShelf,
 			String displayColumn, String displayRow) {
+		System.out.println(INSERT
+				+ DISPLAY_TABLE
+				+ buildInsertString(DISPLAY_SHELF, DISPLAY_COLUMN, DISPLAY_ROW)
+				+ VALUES
+				+ buildInsertValueString(displayShelf, displayColumn,
+						displayRow) + STRING_END);
 		return INSERT
 				+ DISPLAY_TABLE
 				+ buildInsertString(DISPLAY_SHELF, DISPLAY_COLUMN, DISPLAY_ROW)
@@ -395,9 +406,8 @@ public final class DBQuery implements Table, Column, Keyword {
 
 	public static String updateTransactedBooks(String booksId, String quantity) {
 		return UPDATE + BOOKS_TABLE + SET + BOOKS_TOTAL_STOCK + EQUAL_TO
-				+ BOOKS_TOTAL_STOCK+ "-" + quantity+" "
-				+ WHERE + BOOKS_ID + EQUAL_TO + buildEqualCheckString(booksId)
-				+ STRING_END;
+				+ BOOKS_TOTAL_STOCK + "-" + quantity + " " + WHERE + BOOKS_ID
+				+ EQUAL_TO + buildEqualCheckString(booksId) + STRING_END;
 	}
 
 	public static String getMaxMinYear() {
