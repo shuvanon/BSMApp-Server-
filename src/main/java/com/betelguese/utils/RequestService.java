@@ -15,6 +15,7 @@ import main.java.com.betelguese.services.LogInService;
 import main.java.com.betelguese.services.SearchService;
 import main.java.com.betelguese.services.ServiceTag;
 import main.java.com.betelguese.services.TransactionService;
+import main.java.com.betelguese.services.UpdateService;
 import main.java.com.betelguese.utils.helpers.Log;
 import main.java.com.betelguese.utils.json.builders.Message;
 
@@ -73,22 +74,18 @@ public class RequestService implements LogInRequest, TransactionRequest,
 						"no parameter got."));
 				return lessParamClientRequest(requestName);
 			} else {
-				// UpdateService updateService = new UpdateService();
+				UpdateService updateService = new UpdateService();
 				if (updateBooks == null && addBooks != null
 						&& updateSearch == null && maxId == null) {
 					System.out.println(addBooks);
-					return null;
-					// return updateService.updateDatabase(addBooks,
-					// updateBooks);
+					return updateService.updateDatabase(addBooks, updateBooks);
 				} else if (updateBooks == null && addBooks == null
 						&& maxId == null && updateSearch != null) {
-					return null;
-					// return updateService.searchAll(updateSearch);
+					return updateService.searchAll(updateSearch);
 				} else if (updateBooks == null && addBooks == null
 						&& updateSearch == null && maxId != null) {
 					if (maxId.equals("booksTable")) {
-						return null;
-						// return updateService.getMaxId();
+						return updateService.getMaxId();
 					} else {
 						return unauthorizeClientRequest(requestName);
 					}
