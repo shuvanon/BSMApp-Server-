@@ -93,6 +93,7 @@ public class HttpRequestProcess implements RequestName {
 			HttpServletResponse response) {
 		try {
 			final String requestName = request.getParameter(REQUEST_TAG);
+			System.out.println(requestName);
 			if (requestName.equals(LOG_IN_REQUEST)) {
 				Log.d(TAG, LOG_IN_REQUEST
 						+ " is called by the client application");
