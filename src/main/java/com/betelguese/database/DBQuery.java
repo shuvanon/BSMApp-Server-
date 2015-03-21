@@ -395,7 +395,7 @@ public final class DBQuery implements Table, Column, Keyword {
 
 	public static String updateTransactedBooks(String booksId, String quantity) {
 		return UPDATE + BOOKS_TABLE + SET + BOOKS_TOTAL_STOCK + EQUAL_TO
-				+ buildEqualCheckString(BOOKS_TOTAL_STOCK + "-" + quantity)
+				+ buildEqualCheckString(BOOKS_TOTAL_STOCK)+ "-" + quantity+" "
 				+ WHERE + BOOKS_ID + EQUAL_TO + buildEqualCheckString(booksId)
 				+ STRING_END;
 	}
