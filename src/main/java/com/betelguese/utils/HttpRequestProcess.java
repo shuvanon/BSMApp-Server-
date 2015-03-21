@@ -102,7 +102,7 @@ public class HttpRequestProcess implements RequestName {
 						+ " is called by the client application");
 				return null;
 			} else if (requestName.equals(SEARCH_REQUEST)) {
-				Log.d(TAG, SEARCH_REQUEST
+				Log.d(TAG, SEARCH_REQUEST 
 						+ " is called by the client application");
 				return requestService.SearchRequest(requestName, request);
 			} else if (requestName.equals(TRANSACTION_REQUEST)) {

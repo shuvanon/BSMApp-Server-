@@ -85,7 +85,7 @@ public class RequestService implements LogInRequest, TransactionRequest,
 				} else if (updateBooks == null && addBooks == null
 						&& updateSearch == null && maxId != null) {
 					if (maxId.equals("booksTable")) {
-						return updateService.getMaxId();
+ 						return updateService.getMaxId();
 					} else {
 						return unauthorizeClientRequest(requestName);
 					}
