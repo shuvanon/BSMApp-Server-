@@ -16,7 +16,7 @@ public class UpdateBook {
 	private String totalPaid;
 	private String sellerName;
 	private String quantity;
-	private String adminId;
+	private String administratorId;
 
 	public UpdateBook() {
 		this(null, null, null, null, null, null, null, null, null, null, null,
@@ -40,13 +40,13 @@ public class UpdateBook {
 	 * @param totalPaid
 	 * @param sellerName
 	 * @param quantity
-	 * @param adminId
+	 * @param administratorId
 	 */
 	public UpdateBook(String booksId, String booksName, String publisherName,
 			String booksISBN, String booksAuthor, String booksTotalStock,
 			String individualPrice, String displayShelf, String displayColumn,
 			String displayRow, String comment, String totalPaid,
-			String sellerName, String quantity, String adminId) {
+			String sellerName, String quantity, String administratorId) {
 		this.booksId = booksId;
 		this.booksName = booksName;
 		this.publisherName = publisherName;
@@ -61,7 +61,7 @@ public class UpdateBook {
 		this.totalPaid = totalPaid;
 		this.sellerName = sellerName;
 		this.quantity = quantity;
-		this.adminId = adminId;
+		this.administratorId = administratorId;
 	}
 
 	/**
@@ -274,12 +274,12 @@ public class UpdateBook {
 		this.quantity = quantity;
 	}
 
-	public void setAdminId(String adminId) {
-		this.adminId = adminId;
+	public void setAdministratorId(String adminId) {
+		this.administratorId = adminId;
 	}
 
-	public String getAdminId() {
-		return adminId;
+	public String getAdministratorId() {
+		return administratorId;
 	}
 
 	/**
@@ -295,7 +295,7 @@ public class UpdateBook {
 		this.totalPaid = totalPaid;
 		this.sellerName = sellerName;
 		this.quantity = quantity;
-		this.adminId = adminId;
+		this.administratorId = adminId;
 	}
 
 	/*
@@ -307,7 +307,7 @@ public class UpdateBook {
 	public String toString() {
 		return "UpdateSearchResult [comment=" + comment + ", totalPaid="
 				+ totalPaid + ", sellerName=" + sellerName + ", quantity="
-				+ quantity + ", adminName=" + adminId + "]";
+				+ quantity + ", adminName=" + administratorId + "]";
 	}
 
 }

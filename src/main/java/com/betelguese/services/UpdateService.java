@@ -77,7 +77,7 @@ public class UpdateService implements ServiceTag, UpdateRequest {
 			// adding the supply
 			String supplyId = getSupplyId(updateBook.getTotalPaid(),
 					updateBook.getTotalPaid(), updateBook.getComment(),
-					updateBook.getAdminId(), publisherId);
+					updateBook.getAdministratorId(), publisherId);
 			// create e new display id or get the old display id
 			String displayId = getdisplayId(updateBook.getDisplayShelf(),
 					updateBook.getDisplayColumn(), updateBook.getDisplayRow());
