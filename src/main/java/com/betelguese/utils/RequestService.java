@@ -68,6 +68,7 @@ public class RequestService implements LogInRequest, TransactionRequest,
 			final String maxId = request.getParameter(MAX_ID_PARAM);
 			final String updateSearch = request
 					.getParameter(UPDATE_SEARCH_PARAM);
+			System.out.println(maxId+" as");
 			if (addBooks == null && updateBooks == null && updateSearch == null
 					& maxId == null) {
 				Log.e(TAG, "no parameter got", new NullPointerException(
@@ -85,7 +86,6 @@ public class RequestService implements LogInRequest, TransactionRequest,
 				} else if (updateBooks == null && addBooks == null
 						&& updateSearch == null && maxId != null) {
 					if (maxId.equals("booksTable")) {
-						System.out.println(maxId);
  						return updateService.getMaxId();
 					} else {
 						return unauthorizeClientRequest(requestName);
