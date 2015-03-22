@@ -57,7 +57,7 @@ public class ReportService implements ServiceTag {
 				if (maxYear == minYear) {
 					yearReportMessage.setReports(singleYearService(maxYear));
 				} else {
-					multipleYearService(maxYear, minYear);
+					yearReportMessage.setReports(multipleYearService(maxYear, minYear));
 				}
 
 				databaseService.close();
