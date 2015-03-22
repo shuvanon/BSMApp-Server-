@@ -101,9 +101,8 @@ public class ReportService implements ServiceTag {
 					.getYearTransactions(i));
 			if (resultSet.next()) {
 				yearReport.setYear(Integer.toString(i));
-				yearReport
-						.setValue(resultSet.getString(Integer.toString(i)) == null ? "0"
-								: resultSet.getString(Integer.toString(i)));
+				yearReport.setValue(resultSet.getString("y" + i) == null ? "0"
+						: resultSet.getString("y" + i));
 			} else {
 				yearReport.setYear(Integer.toString(i));
 				yearReport.setValue("0");
@@ -121,8 +120,8 @@ public class ReportService implements ServiceTag {
 		if (resultSet.next()) {
 			yearReport.setYear(Integer.toString(maxYear));
 			yearReport
-					.setValue(resultSet.getString(Integer.toString(maxYear)) == null ? "0"
-							: resultSet.getString(Integer.toString(maxYear)));
+					.setValue(resultSet.getString("y" + maxYear) == null ? "0"
+							: resultSet.getString("y" + maxYear));
 		} else {
 			yearReport.setYear(Integer.toString(maxYear));
 			yearReport.setValue("0");
