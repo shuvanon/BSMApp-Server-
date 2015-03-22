@@ -66,7 +66,7 @@ interface DBUtils {
 
 		// transaction table column
 		public static final String TRANSACTION_ID = "transaction_id";
-		public static final String TRANSACTION_DATE = "transaction_date";
+		public static final String TRANSACTION_DATE = "transactions_date";
 
 		// customer table column
 		public static final String CUSTOMER_ID = "customer_id";
