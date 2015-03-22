@@ -411,12 +411,16 @@ public final class DBQuery implements Table, Column, Keyword {
 	}
 
 	public static String getMaxMinYear() {
-		return "select max(transactions_date) as max_year,min(transactions_date) as min_year from transactions;";
+		return SELECT + MAX + buildFunctionString(TRANSACTION_DATE) + AS
+				+ MAX_YEAR + COMMA + MIN
+				+ buildFunctionString(TRANSACTION_DATE) + AS + MIN_YEAR + FROM
+				+ TRANSACTION_TABLE + STRING_END;
 	}
 
 	public static String getYearTransactions(int year) {
-		return "select sum(total_price) as total from transactions where transactions_date like '"
-				+ year + "%';";
+		return SELECT + SUM + buildFunctionString(TOTAL_PRICE) + AS + year
+				+ FROM + TRANSACTION_TABLE + WHERE + TRANSACTION_DATE + LIKE
+				+ buildLikeCheckString(Integer.toString(year)) + STRING_END;
 	}
 
 	/**

@@ -12,6 +12,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import main.java.com.betelguese.services.LogInService;
+import main.java.com.betelguese.services.ReportService;
 import main.java.com.betelguese.services.SearchService;
 import main.java.com.betelguese.services.ServiceTag;
 import main.java.com.betelguese.services.TransactionService;
@@ -85,7 +86,7 @@ public class RequestService implements LogInRequest, TransactionRequest,
 				} else if (updateBooks == null && addBooks == null
 						&& updateSearch == null && maxId != null) {
 					if (maxId.equals("booksTable")) {
- 						return updateService.getMaxId();
+						return updateService.getMaxId();
 					} else {
 						return unauthorizeClientRequest(requestName);
 					}
@@ -105,9 +106,8 @@ public class RequestService implements LogInRequest, TransactionRequest,
 			if (service == null) {
 				return lessParamClientRequest(requestName);
 			} else {
-				// ReportService reportService = new ReportService();
-				return null;
-				// return reportService.getReport(service);
+				ReportService reportService = new ReportService();
+				return reportService.getReport(service);
 			}
 		} catch (NullPointerException e) {
 			Log.e(TAG, "Error to get params", e);

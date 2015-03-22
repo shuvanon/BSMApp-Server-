@@ -66,14 +66,19 @@ interface DBUtils {
 
 		// transaction table column
 		public static final String TRANSACTION_ID = "transaction_id";
+		public static final String TRANSACTION_DATE = "transaction_date";
 
 		// customer table column
 		public static final String CUSTOMER_ID = "customer_id";
 		public static final String CUSTOMER_NAME = "customer_name";
 		public static final String CUSTOMER_MOBILE = "customer_mobile";
-		
+
 		// books_has_transaction table column
 		public static final String DISCOUNT = "discount";
+
+		// column changed name
+		public static final String MAX_YEAR = "max_year";
+		public static final String MIN_YEAR = "min_year";
 
 	}
 
@@ -81,8 +86,9 @@ interface DBUtils {
 
 		public static final String UPDATE = "UPDATE ";
 		public static final String SELECT = "SELECT ";
-		public static final String MAX = "MAX";
-		public static final String AS = "AS";
+		public static final String MAX = " MAX";
+		public static final String MIN = " MIN";
+		public static final String AS = " AS ";
 		public static final String FROM = " FROM ";
 		public static final String ASTERICKS = "*";
 		public static final String SELECT_ALL = SELECT + ASTERICKS + FROM;
