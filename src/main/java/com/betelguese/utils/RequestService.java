@@ -102,12 +102,15 @@ public class RequestService implements LogInRequest, TransactionRequest,
 
 	public String reportRequest(String requestName, HttpServletRequest request) {
 		try {
-			final String service = request.getParameter(SERVICE_PARAM);
-			if (service == null) {
+
+			final String serviceKey = request.getParameter(R_SERVICE_KEY_PARAM);
+			final String serviceValue = request
+					.getParameter(R_SERVICE_VALUE_PARAM);
+			if (serviceKey == null || serviceValue == null) {
 				return lessParamClientRequest(requestName);
 			} else {
 				ReportService reportService = new ReportService();
-				return reportService.getReport(service);
+				return reportService.getReport(serviceKey, serviceValue);
 			}
 		} catch (NullPointerException e) {
 			Log.e(TAG, "Error to get params", e);

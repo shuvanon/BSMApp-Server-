@@ -38,7 +38,14 @@ public interface RequestName {
 	}
 
 	public interface ReportRequest {
-		public static final String SERVICE_PARAM = "service";
+		public static final String R_SERVICE_KEY_PARAM = "serviceKey";
+		public static final String R_SERVICE_VALUE_PARAM = "serviceValue";
+		public static final String YEARLY_SERVICE_KEY = "yearlyService";
+		public static final String GET_YEAR_SERVICE_KEY = "getYearService";
+		public static final String MONTHLY_SERVICE_KEY = "monthlyService";
+		public static final String DAILY_SERVICE_KEY = "dailyService";
+		public static final String TRANSACTION_SERVICE_KEY = "transactionService";
+
 	}
 
 	public interface SearchRequest {

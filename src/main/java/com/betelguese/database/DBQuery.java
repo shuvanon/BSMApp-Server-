@@ -418,9 +418,17 @@ public final class DBQuery implements Table, Column, Keyword {
 	}
 
 	public static String getYearTransactions(int year) {
-		return SELECT + SUM + buildFunctionString(TOTAL_PRICE) + AS + "y"+year
+		return SELECT + SUM + buildFunctionString(TOTAL_PRICE) + AS + "y"
+				+ year + FROM + TRANSACTION_TABLE + WHERE + TRANSACTION_DATE
+				+ LIKE + buildLikeCheckString(Integer.toString(year))
+				+ STRING_END;
+	}
+
+	public static String getMonthTransactions(String year, String month,
+			String monthName) {
+		return SELECT + SUM + buildFunctionString(TOTAL_PRICE) + AS + monthName
 				+ FROM + TRANSACTION_TABLE + WHERE + TRANSACTION_DATE + LIKE
-				+ buildLikeCheckString(Integer.toString(year)) + STRING_END;
+				+ buildLikeCheckString(year + "-" + month) + STRING_END;
 	}
 
 	/**
