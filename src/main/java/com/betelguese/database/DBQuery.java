@@ -431,6 +431,14 @@ public final class DBQuery implements Table, Column, Keyword {
 				+ buildLikeCheckString(year + "-" + month) + STRING_END;
 	}
 
+	public static String getDayTransactions(String year, String month,
+			String day, String monthName) {
+		return SELECT + SUM + buildFunctionString(TOTAL_PRICE) + AS + monthName
+				+ FROM + TRANSACTION_TABLE + WHERE + TRANSACTION_DATE + LIKE
+				+ buildLikeCheckString(year + "-" + month + "-" + day)
+				+ STRING_END;
+	}
+
 	/**
 	 * 
 	 * @param string

@@ -4,36 +4,36 @@ package main.java.com.betelguese.utils.items;
  * @author tuman
  *
  */
-public class MonthReport {
+public class DayReport {
 
-	private String month;
+	private String day;
 	private String value;
 
-	public MonthReport() {
+	public DayReport() {
 	}
 
 	/**
-	 * @param month
+	 * @param day
 	 * @param value
 	 */
-	public MonthReport(String month, String value) {
-		this.month = month;
+	public DayReport(String day, String value) {
+		this.day = day;
 		this.value = value;
 	}
 
 	/**
-	 * @return the month
+	 * @return the day
 	 */
-	public String getMonth() {
-		return month;
+	public String getDay() {
+		return day;
 	}
 
 	/**
-	 * @param month
-	 *            the month to set
+	 * @param day
+	 *            the day to set
 	 */
-	public void setMonth(String month) {
-		this.month = month;
+	public void setDay(String day) {
+		this.day = day;
 	}
 
 	/**
@@ -58,7 +58,7 @@ public class MonthReport {
 	 */
 	@Override
 	public String toString() {
-		return "MonthReport [month=" + month + ", value=" + value + "]";
+		return "DayReport [day=" + day + ", value=" + value + "]";
 	}
 
 }

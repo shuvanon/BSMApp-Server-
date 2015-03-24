@@ -3,7 +3,9 @@ package main.java.com.betelguese.services;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 import com.google.gson.Gson;
@@ -16,9 +18,11 @@ import main.java.com.betelguese.utils.RequestName;
 import main.java.com.betelguese.utils.RequestName.ReportRequest;
 import main.java.com.betelguese.utils.helpers.Constants;
 import main.java.com.betelguese.utils.helpers.Log;
+import main.java.com.betelguese.utils.items.DayReport;
 import main.java.com.betelguese.utils.items.MonthReport;
 import main.java.com.betelguese.utils.items.ReportServiceValue;
 import main.java.com.betelguese.utils.items.YearReport;
+import main.java.com.betelguese.utils.json.builders.DayReportMessage;
 import main.java.com.betelguese.utils.json.builders.MonthReportMessage;
 import main.java.com.betelguese.utils.json.builders.ServiceMessage;
 import main.java.com.betelguese.utils.json.builders.YearReportMessage;
@@ -136,7 +140,53 @@ public class ReportService implements ServiceTag, ReportRequest {
 	}
 
 	private String dayService(String yearValue, String monthValue) {
-		return null;
+		try {
+			databaseService.open();
+			DayReportMessage dayReportMessage = new DayReportMessage(1,
+					MessageBuilder
+							.messageBuilder(SUCCESS_SERVICE, REQUEST_NAME),
+					REQUEST_NAME);
+			dayReportMessage.setMonth(monthValue);
+			Calendar calendar = null;
+			String month = null;
+			for (int i = 0; i < 12; i++) {
+				if (monthValue.equals(Constants.month[i])) {
+					calendar = new GregorianCalendar(
+							Integer.parseInt(yearValue), i, 1);
+					month = Integer.toString(i + 1).length() == 1 ? "0"
+							+ (i + 1) : Integer.toString(i + 1);
+					break;
+				}
+			}
+
+			int daysInMonth = calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
+			List<DayReport> reports = new ArrayList<DayReport>();
+			for (int i = 1; i <= daysInMonth; i++) {
+				DayReport dayReport = new DayReport();
+				String day = Integer.toString(i).length() == 1 ? "0" + (i)
+						: Integer.toString(i);
+				resultSet = databaseService.executeQuery(DBQuery
+						.getDayTransactions(yearValue, month, day, monthValue));
+				dayReport.setDay(day);
+				resultSet.next();
+				dayReport
+						.setValue(resultSet.getString(monthValue) == null ? "0"
+								: resultSet.getString(monthValue));
+
+				reports.add(dayReport);
+			}
+			dayReportMessage.setReports(reports);
+			Gson gson = new GsonBuilder().create();
+			return gson.toJson(dayReportMessage);
+		} catch (InstantiationException e) {
+			return serverErrorMessage(e);
+		} catch (IllegalAccessException e) {
+			return serverErrorMessage(e);
+		} catch (ClassNotFoundException e) {
+			return serverErrorMessage(e);
+		} catch (SQLException e) {
+			return serverErrorMessage(e);
+		}
 	}
 
 	private String monthService(String year) {
