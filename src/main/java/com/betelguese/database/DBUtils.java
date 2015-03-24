@@ -65,7 +65,7 @@ interface DBUtils {
 		public static final String QUANTITY = "quantity";
 
 		// transaction table column
-		public static final String TRANSACTION_ID = "transaction_id";
+		public static final String TRANSACTION_ID = "transactions_id";
 		public static final String TRANSACTION_DATE = "transactions_date";
 
 		// customer table column
