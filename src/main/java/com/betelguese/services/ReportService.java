@@ -147,10 +147,10 @@ public class ReportService implements ServiceTag, ReportRequest {
 							.messageBuilder(SUCCESS_SERVICE, REQUEST_NAME),
 					REQUEST_NAME);
 			List<MonthReport> reports = new ArrayList<MonthReport>();
-			for (int i = 1; i <= 12; i++) {
+			for (int i = 0; i < 12; i++) {
 				MonthReport monthReport = new MonthReport();
-				String month = Integer.toString(i).length() == 1 ? "0" + (i)
-						: Integer.toString(i);
+				String month = Integer.toString(i + 1).length() == 1 ? "0"
+						+ (i + 1) : Integer.toString(i + 1);
 				resultSet = databaseService.executeQuery(DBQuery
 						.getMonthTransactions(year, month, Constants.month[i]));
 				monthReport.setMonth(Constants.month[i]);
