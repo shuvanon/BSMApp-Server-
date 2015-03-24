@@ -398,7 +398,7 @@ public final class DBQuery implements Table, Column, Keyword {
 			String transactionId, String quantity) {
 		return INSERT
 				+ BOOKS_HAS_TRANSACTION_TABLE
-				+ buildInsertString(BOOKS_ID, TRANSACTION_ID, QUANTITY,
+				+ buildInsertString(BOOKS_ID, TRANSACTIONS_ID, QUANTITY,
 						DISCOUNT) + VALUES
 				+ buildInsertValueString(booksId, transactionId, quantity, "0")
 				+ STRING_END;
