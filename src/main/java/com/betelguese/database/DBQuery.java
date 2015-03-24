@@ -426,7 +426,7 @@ public final class DBQuery implements Table, Column, Keyword {
 
 	public static String getMonthTransactions(String year, String month,
 			String monthName) {
-		return SELECT + SUM + buildFunctionString(TOTAL_PRICE) + AS + monthName
+		return SELECT + SUM + buildFunctionString(TOTAL_PRICE) + AS + monthName+"_"+month
 				+ FROM + TRANSACTION_TABLE + WHERE + TRANSACTION_DATE + LIKE
 				+ buildLikeCheckString(year + "-" + month) + STRING_END;
 	}

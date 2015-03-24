@@ -154,9 +154,9 @@ public class ReportService implements ServiceTag, ReportRequest {
 				resultSet = databaseService.executeQuery(DBQuery
 						.getMonthTransactions(year, month, Constants.month[i]));
 				monthReport.setMonth(Constants.month[i]);
-				monthReport
-						.setValue(resultSet.getString(Constants.month[i]) == null ? "0"
-								: resultSet.getString(Constants.month[i]));
+				monthReport.setValue(resultSet.getString(Constants.month[i]
+						+ "_" + (i + 1)) == null ? "0" : resultSet
+						.getString(Constants.month[i] + (i + 1)));
 				reports.add(monthReport);
 			}
 			monthReportMessage.setReports(reports);
@@ -243,7 +243,8 @@ public class ReportService implements ServiceTag, ReportRequest {
 	}
 
 	private String serverErrorMessage(Exception e) {
-		Log.e(TAG, e.getClass().getSimpleName() + " occured"+e.getMessage(), e);
+		Log.e(TAG, e.getClass().getSimpleName() + " occured" + e.getMessage(),
+				e);
 		ServiceMessage serviceMessage = new ServiceMessage(0,
 				MessageBuilder.messageBuilder(SERVER_ERROR, REQUEST_NAME),
 				REQUEST_NAME);
