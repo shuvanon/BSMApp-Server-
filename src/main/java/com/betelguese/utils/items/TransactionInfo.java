@@ -15,6 +15,25 @@ public class TransactionInfo {
 	}
 
 	/**
+	 * @param customerName
+	 * @param customerNumber
+	 * @param transactionId
+	 * @param totalPaid
+	 * @param adminId
+	 * @param transactionBooks
+	 */
+	public TransactionInfo(String customerName, String customerNumber,
+			String transactionId, String totalPaid, String adminId,
+			List<TransactionBook> transactionBooks) {
+		this.customerName = customerName;
+		this.customerNumber = customerNumber;
+		this.transactionId = transactionId;
+		this.totalPaid = totalPaid;
+		this.adminId = adminId;
+		this.transactionBooks = transactionBooks;
+	}
+
+	/**
 	 * @return the customerName
 	 */
 	public String getCustomerName() {
@@ -102,6 +121,19 @@ public class TransactionInfo {
 	 */
 	public void setTransactionBooks(List<TransactionBook> transactionBooks) {
 		this.transactionBooks = transactionBooks;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "TransactionInfo [customerName=" + customerName
+				+ ", customerNumber=" + customerNumber + ", transactionId="
+				+ transactionId + ", totalPaid=" + totalPaid + ", adminId="
+				+ adminId + ", transactionBooks=" + transactionBooks + "]";
 	}
 
 }

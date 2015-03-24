@@ -21,10 +21,13 @@ import main.java.com.betelguese.utils.helpers.Log;
 import main.java.com.betelguese.utils.items.DayReport;
 import main.java.com.betelguese.utils.items.MonthReport;
 import main.java.com.betelguese.utils.items.ReportServiceValue;
+import main.java.com.betelguese.utils.items.TransactionBook;
+import main.java.com.betelguese.utils.items.TransactionReport;
 import main.java.com.betelguese.utils.items.YearReport;
 import main.java.com.betelguese.utils.json.builders.DayReportMessage;
 import main.java.com.betelguese.utils.json.builders.MonthReportMessage;
 import main.java.com.betelguese.utils.json.builders.ServiceMessage;
+import main.java.com.betelguese.utils.json.builders.TransactionReportMessage;
 import main.java.com.betelguese.utils.json.builders.YearReportMessage;
 
 public class ReportService implements ServiceTag, ReportRequest {
@@ -69,8 +72,10 @@ public class ReportService implements ServiceTag, ReportRequest {
 				return serverErrorMessage(new Exception("Error Service Value"));
 			}
 		} else if (serviceKey.equals(TRANSACTION_SERVICE_KEY)) {
-			if (serviceValue.equals("year")) {
-				return yearService();
+			if (reportServiceValue.getServiceName().equals("transaction")
+					&& reportServiceValue.getYearValue() == null
+					&& reportServiceValue.getMonthValue() == null) {
+				return transactionService();
 			} else {
 				return serverErrorMessage(new Exception("Error Service Value"));
 			}
@@ -85,6 +90,85 @@ public class ReportService implements ServiceTag, ReportRequest {
 		} else {
 			return serverErrorMessage(new Exception("Error Service Value"));
 		}
+	}
+
+	private String transactionService() {
+		// TODO Auto-generated method stub
+		TransactionReportMessage transactionReportMessage = new TransactionReportMessage(
+				1,
+				MessageBuilder.messageBuilder(SUCCESS_SERVICE, REQUEST_NAME),
+				REQUEST_NAME);
+		try {
+			databaseService.open();
+			resultSet = databaseService.executeQuery(DBQuery
+					.getAllTransaction());
+			if (resultSet.next()) {
+				transactionReportMessage.setReports(getAllReports(resultSet));
+			}
+			Gson gson = new GsonBuilder().create();
+			return gson.toJson(transactionReportMessage);
+		} catch (InstantiationException e) {
+			e.printStackTrace();
+			return null;
+		} catch (IllegalAccessException e) {
+			e.printStackTrace();
+			return null;
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+			return null;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+
+	private List<TransactionReport> getAllReports(ResultSet resultSet)
+			throws SQLException {
+		List<TransactionReport> reports = new ArrayList<TransactionReport>();
+		do {
+			TransactionReport transactionReport = new TransactionReport();
+			transactionReport.setAdminId(resultSet
+					.getString("administrator_id"));
+			transactionReport.setAdminName(resultSet
+					.getString("administrator_name"));
+			transactionReport.setDate(resultSet.getString("transactions_date"));
+			transactionReport.setTotalPaid(resultSet.getString("total_price"));
+			transactionReport.setCustomerName(resultSet
+					.getString("customer_name"));
+			transactionReport.setCustomerNumber(resultSet
+					.getString("customer_mobile"));
+			transactionReport.setTransactionId(resultSet
+					.getString("transaction_id"));
+			transactionReport.setTransactionBooks(getTransactionBooks(resultSet
+					.getString("transaction_id")));
+			reports.add(transactionReport);
+		} while (resultSet.next());
+		return reports;
+	}
+
+	private List<TransactionBook> getTransactionBooks(String transactions_id)
+			throws SQLException {
+		// TODO Auto-generated method stub
+		ResultSet localResultSet = databaseService.executeQuery(DBQuery
+				.getAllTransactionBooks(transactions_id));
+		List<TransactionBook> transactionBooks = new ArrayList<TransactionBook>();
+		if (localResultSet.next()) {
+			do {
+				TransactionBook transactionBook = new TransactionBook();
+				transactionBook
+						.setBooksId(localResultSet.getString("books_id"));
+				transactionBook.setBooksName(localResultSet
+						.getString("books_name"));
+				transactionBook.setBooksPrice(localResultSet
+						.getString("individual_price"));
+				transactionBook.setQuantity(localResultSet
+						.getString("quantity"));
+				transactionBook.setBooksAuthor(localResultSet
+						.getString("books_author"));
+				transactionBooks.add(transactionBook);
+			} while (localResultSet.next());
+		}
+		return transactionBooks;
 	}
 
 	private String getYearService() {

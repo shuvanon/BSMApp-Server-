@@ -439,6 +439,13 @@ public final class DBQuery implements Table, Column, Keyword {
 				+ STRING_END;
 	}
 
+	public static String getAllTransaction() {
+		// TODO Auto-generated method stub
+		return SELECT_ALL + TRANSACTION_TABLE + NATURAL + JOIN + CUSTOMER_TABLE
+				+ JOIN + ADMINISTRATION_TABLE + USING
+				+ buildFunctionString(ADMINISTRATOR_ID);
+	}
+
 	/**
 	 * 
 	 * @param string
@@ -527,5 +534,11 @@ public final class DBQuery implements Table, Column, Keyword {
 		}
 		stringBuilder.append(") ");
 		return stringBuilder.toString();
+	}
+
+	public static String getAllTransactionBooks(String transactions_id) {
+		return SELECT_ALL + BOOKS_HAS_TRANSACTION_TABLE + NATURAL + JOIN
+				+ BOOKS_TABLE + WHERE + TRANSACTIONS_ID + EQUAL_TO
+				+ buildEqualCheckString(transactions_id) + STRING_END;
 	}
 }
