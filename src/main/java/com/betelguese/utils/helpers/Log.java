@@ -19,5 +19,4 @@ public class Log {
 		System.err.println(TAG + ":\t\t" + errorMessage);
 		//Logger.getLogger(TAG).log(Level.SEVERE, errorMessage, error);
 	}
-
 }
