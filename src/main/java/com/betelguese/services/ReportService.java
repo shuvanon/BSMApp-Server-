@@ -25,7 +25,7 @@ import main.java.com.betelguese.utils.json.builders.YearReportMessage;
 
 public class ReportService implements ServiceTag, ReportRequest {
 	private static final String TAG = ReportService.class.getSimpleName();
-	private static final String REQUEST_NAME = RequestName.LOG_IN_REQUEST;
+	private static final String REQUEST_NAME = RequestName.REPORT_REQUEST;
 	private DatabaseService databaseService;
 	private ResultSet resultSet;
 
