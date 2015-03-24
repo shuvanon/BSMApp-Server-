@@ -155,8 +155,8 @@ public class ReportService implements ServiceTag, ReportRequest {
 						.getMonthTransactions(year, month, Constants.month[i]));
 				monthReport.setMonth(Constants.month[i]);
 				monthReport.setValue(resultSet.getString(Constants.month[i]
-						+ "_" + (i + 1)) == null ? "0" : resultSet
-						.getString(Constants.month[i] +"_"+ (i + 1)));
+						+ "_" + month) == null ? "0" : resultSet
+						.getString(Constants.month[i] +"_"+ month));
 				
 				reports.add(monthReport);
 			}
