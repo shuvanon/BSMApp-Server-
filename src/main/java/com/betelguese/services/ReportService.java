@@ -243,8 +243,7 @@ public class ReportService implements ServiceTag, ReportRequest {
 	}
 
 	private String serverErrorMessage(Exception e) {
-		Log.e(TAG, e.getClass().getSimpleName()
-				+ " occured.search was not successful.", e);
+		Log.e(TAG, e.getClass().getSimpleName() + " occured"+e.getMessage(), e);
 		ServiceMessage serviceMessage = new ServiceMessage(0,
 				MessageBuilder.messageBuilder(SERVER_ERROR, REQUEST_NAME),
 				REQUEST_NAME);
