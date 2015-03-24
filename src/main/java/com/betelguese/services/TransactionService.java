@@ -60,7 +60,7 @@ public class TransactionService implements ServiceTag, TransactionRequest {
 			List<TransactionBook> transactionBooks = transactionInfo
 					.getTransactionBooks();
 			for (int i = 0; i < transactionBooks.size(); i++) {
-				TransactionBook transactionBook = transactionBooks.get(0);
+				TransactionBook transactionBook = transactionBooks.get(i);
 				final String booksId = transactionBook.getBooksId();
 				final String quantity = transactionBook.getQuantity();
 				createBookTransaction(booksId, transactionId, quantity);
