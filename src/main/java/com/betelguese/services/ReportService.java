@@ -154,10 +154,11 @@ public class ReportService implements ServiceTag, ReportRequest {
 				resultSet = databaseService.executeQuery(DBQuery
 						.getMonthTransactions(year, month, Constants.month[i]));
 				monthReport.setMonth(Constants.month[i]);
+				resultSet.next();
 				monthReport.setValue(resultSet.getString(Constants.month[i]
 						+ "_" + month) == null ? "0" : resultSet
-						.getString(Constants.month[i] +"_"+ month));
-				
+						.getString(Constants.month[i] + "_" + month));
+
 				reports.add(monthReport);
 			}
 			monthReportMessage.setReports(reports);
