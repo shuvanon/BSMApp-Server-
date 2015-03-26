@@ -15,7 +15,7 @@ public interface RequestName {
 	public static final String TRANSACTION_REQUEST = "transactionRequest";
 	public static final String UPDATE_REQUEST = "updateRequest";
 	public static final String REPORT_REQUEST = "reportRequest";
-	public static final String CREATE_USER_REQUEST = "createUserRequest";
+	public static final String SETTINGS_REQUEST = "settingsRequest";
 
 	public interface LogInRequest {
 		public static final String USERNAME_PARAM = "userName";
@@ -58,5 +58,11 @@ public interface RequestName {
 		public static final String SEARCH_BY_ISBN_PARAM = "searchByISBN";
 		public static final String SEARCH_BY_SHELF_PARAM = "searchByShelf";
 		public static final String SEARCH_BY_ALL_PARAM = "searchByAll";
+	}
+
+	public interface SettingsRequest {
+		public static final String SERVICE_KEY_PARAM = "serviceKey";
+		public static final String CHANGE_NAME_PARAM = "changeUsername";
+		public static final String SERVICE_VALUE_PARAM = "serviceValue";
 	}
 }

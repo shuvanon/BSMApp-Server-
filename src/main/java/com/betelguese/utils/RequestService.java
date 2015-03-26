@@ -15,6 +15,7 @@ import main.java.com.betelguese.services.LogInService;
 import main.java.com.betelguese.services.ReportService;
 import main.java.com.betelguese.services.SearchService;
 import main.java.com.betelguese.services.ServiceTag;
+import main.java.com.betelguese.services.SettingsService;
 import main.java.com.betelguese.services.TransactionService;
 import main.java.com.betelguese.services.UpdateService;
 import main.java.com.betelguese.utils.helpers.Log;
@@ -128,6 +129,23 @@ public class RequestService implements LogInRequest, TransactionRequest,
 				return lessParamClientRequest(requestName);
 			} else {
 				TransactionService service = new TransactionService();
+				return service.getService(serviceKey, serviceValue);
+			}
+		} catch (NullPointerException e) {
+			Log.e(TAG, "Error to get params", e);
+			return lessParamClientRequest(requestName);
+		}
+	}
+
+	public String settingsRequest(String requestName, HttpServletRequest request) {
+		try {
+			final String serviceKey = request.getParameter(SERVICE_KEY_PARAM);
+			final String serviceValue = request
+					.getParameter(SERVICE_VALUE_PARAM);
+			if (serviceKey == null && serviceValue == null) {
+				return lessParamClientRequest(requestName);
+			} else {
+				SettingsService service = new SettingsService();
 				return service.getService(serviceKey, serviceValue);
 			}
 		} catch (NullPointerException e) {

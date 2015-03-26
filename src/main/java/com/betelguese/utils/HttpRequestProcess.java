@@ -97,12 +97,12 @@ public class HttpRequestProcess implements RequestName {
 				Log.d(TAG, LOG_IN_REQUEST
 						+ " is called by the client application");
 				return requestService.logInRequest(requestName, request);
-			} else if (requestName.equals(CREATE_USER_REQUEST)) {
-				Log.d(TAG, CREATE_USER_REQUEST
+			} else if (requestName.equals(SETTINGS_REQUEST)) {
+				Log.d(TAG, SETTINGS_REQUEST
 						+ " is called by the client application");
-				return null;
+				return requestService.settingsRequest(requestName, request);
 			} else if (requestName.equals(SEARCH_REQUEST)) {
-				Log.d(TAG, SEARCH_REQUEST 
+				Log.d(TAG, SEARCH_REQUEST
 						+ " is called by the client application");
 				return requestService.SearchRequest(requestName, request);
 			} else if (requestName.equals(TRANSACTION_REQUEST)) {
