@@ -63,6 +63,9 @@ public interface RequestName {
 	public interface SettingsRequest {
 		public static final String SERVICE_KEY_PARAM = "serviceKey";
 		public static final String CHANGE_NAME_PARAM = "changeUsername";
+		public static final String CHANGE_PASSWORD_PARAM = "changePassword";
+		public static final String CREATE_USER_PARAM = "createUser";
+
 		public static final String SERVICE_VALUE_PARAM = "serviceValue";
 	}
 }

@@ -33,6 +33,8 @@ interface DBUtils {
 
 		// administrator table column
 		public static final String ADMINISTRATOR_ID = "administrator_id";
+		public static final String ADMINISTRATOR_NAME = "administrator_name";
+		public static final String ADMINISTRATOR_LAST_UPDATE = "admin_last_update";
 		public static final String USERNAME = "user_name";
 		public static final String PASSWORD = "password";
 
@@ -108,6 +110,7 @@ interface DBUtils {
 		public static final String AND = " AND ";
 		public static final String SET = " SET ";
 		public static final String OR = " OR ";
+		public static final String NOW = " now() ";
 		public static final String STRING_END = " ;";
 		public static final String COLUMN = " COLUMN ";
 		public static final String TABLE = " TABLE ";

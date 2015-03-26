@@ -541,4 +541,11 @@ public final class DBQuery implements Table, Column, Keyword {
 				+ BOOKS_TABLE + WHERE + TRANSACTIONS_ID + EQUAL_TO
 				+ buildEqualCheckString(transactions_id) + STRING_END;
 	}
+
+	public static String updateAdminName(String adminName, String adminId) {
+		return UPDATE + ADMINISTRATION_TABLE + SET + ADMINISTRATOR_NAME
+				+ EQUAL_TO + buildEqualCheckString(adminName) + COMMA
+				+ ADMINISTRATOR_LAST_UPDATE + EQUAL_TO + NOW + WHERE
+				+ ADMINISTRATOR_ID + EQUAL_TO + adminId + STRING_END;
+	}
 }
