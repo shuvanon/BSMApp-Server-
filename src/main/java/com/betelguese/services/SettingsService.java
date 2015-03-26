@@ -9,6 +9,7 @@ import com.google.gson.GsonBuilder;
 import main.java.com.betelguese.database.DBQuery;
 import main.java.com.betelguese.database.DatabaseService;
 import main.java.com.betelguese.utils.MessageBuilder;
+import main.java.com.betelguese.utils.MessageEncryption;
 import main.java.com.betelguese.utils.RequestName;
 import main.java.com.betelguese.utils.RequestName.SettingsRequest;
 import main.java.com.betelguese.utils.helpers.Log;
@@ -56,8 +57,9 @@ public class SettingsService implements SettingsRequest, ServiceTag {
 					if (settingsItem.getChangeName() == null
 							&& settingsItem.getChangePassword() != null
 							&& settingsItem.getNewUser() == null) {
-						return changePasswordService(settingsItem
-								.getChangePassword());
+						return changePasswordService(
+								settingsItem.getChangePassword(),
+								settingsItem.getAdminId());
 					} else {
 						databaseService.close();
 						return serverErrorMessage(new Exception(
@@ -101,8 +103,27 @@ public class SettingsService implements SettingsRequest, ServiceTag {
 		return gson.toJson(serviceMessage);
 	}
 
-	private String changePasswordService(ChangePassword changePassword) {
-		return null;
+	private String changePasswordService(ChangePassword changePassword,
+			String adminId) throws SQLException {
+		resultSet = databaseService.executeQuery(DBQuery.getOldPassword(
+				MessageEncryption.encryptMessage(changePassword
+						.getOldPassword()), adminId));
+		resultSet.next();
+		if (resultSet.getString("password").equals(
+				MessageEncryption.encryptMessage(changePassword
+						.getOldPassword()))) {
+			databaseService.execute(DBQuery.updateAdminPassword(
+					MessageEncryption.encryptMessage(changePassword
+							.getNewPassword()), adminId));
+			ServiceMessage serviceMessage = new ServiceMessage(1,
+					MessageBuilder
+							.messageBuilder(SUCCESS_SERVICE, REQUEST_NAME),
+					REQUEST_NAME);
+			Gson gson = new GsonBuilder().create();
+			return gson.toJson(serviceMessage);
+		} else {
+			return serverErrorMessage(new Exception("password did'nt match."));
+		}
 	}
 
 	private String createUserService(NewUser newUser) {

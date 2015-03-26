@@ -548,4 +548,18 @@ public final class DBQuery implements Table, Column, Keyword {
 				+ ADMINISTRATOR_LAST_UPDATE + EQUAL_TO + NOW + WHERE
 				+ ADMINISTRATOR_ID + EQUAL_TO + adminId + STRING_END;
 	}
+
+	public static String updateAdminPassword(String newPassword, String adminId) {
+		return UPDATE + ADMINISTRATION_TABLE + SET + PASSWORD + EQUAL_TO
+				+ buildEqualCheckString(newPassword) + COMMA
+				+ ADMINISTRATOR_LAST_UPDATE + EQUAL_TO + NOW + WHERE
+				+ ADMINISTRATOR_ID + EQUAL_TO + adminId + STRING_END;
+	}
+
+	public static String getOldPassword(String oldPassword, String adminId) {
+		// TODO Auto-generated method stub
+		return SELECT_ALL + ADMINISTRATION_TABLE + WHERE + ADMINISTRATOR_ID
+				+ EQUAL_TO + adminId + COMMA + PASSWORD + EQUAL_TO
+				+ buildEqualCheckString(oldPassword) + STRING_END;
+	}
 }

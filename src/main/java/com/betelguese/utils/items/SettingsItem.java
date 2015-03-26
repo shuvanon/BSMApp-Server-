@@ -30,6 +30,7 @@ public class SettingsItem {
 	 */
 	public SettingsItem(String adminId, NewUser newUser,
 			ChangePassword changePassword, ChangeName changeName) {
+		this.adminId=adminId;
 		this.newUser = newUser;
 		this.changePassword = changePassword;
 		this.changeName = changeName;
