@@ -562,7 +562,7 @@ public final class DBQuery implements Table, Column, Keyword {
 				+ EQUAL_TO + adminId + COMMA + PASSWORD + EQUAL_TO
 				+ buildEqualCheckString(oldPassword) + STRING_END);
 		return SELECT_ALL + ADMINISTRATION_TABLE + WHERE + ADMINISTRATOR_ID
-				+ EQUAL_TO + adminId + COMMA + PASSWORD + EQUAL_TO
+				+ EQUAL_TO + adminId + AND + PASSWORD + EQUAL_TO
 				+ buildEqualCheckString(oldPassword) + STRING_END;
 	}
 }
