@@ -577,7 +577,7 @@ public final class DBQuery implements Table, Column, Keyword {
 			String password, String adminLevel) {
 
 		return INSERT
-				+ SUPPLY_TABLE
+				+ ADMINISTRATION_TABLE
 				+ buildInsertString(ADMINISTRATOR_NAME, USERNAME, PASSWORD,
 						ADMINISTRATOR_LEVEL)
 				+ VALUES
