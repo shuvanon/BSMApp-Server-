@@ -33,6 +33,7 @@ interface DBUtils {
 
 		// administrator table column
 		public static final String ADMINISTRATOR_ID = "administrator_id";
+		public static final String ADMINISTRATOR_LEVEL = "administrator_level";
 		public static final String ADMINISTRATOR_NAME = "administrator_name";
 		public static final String ADMINISTRATOR_LAST_UPDATE = "admin_last_update";
 		public static final String USERNAME = "user_name";

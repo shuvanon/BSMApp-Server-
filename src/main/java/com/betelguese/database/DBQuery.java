@@ -3,6 +3,7 @@ package main.java.com.betelguese.database;
 import main.java.com.betelguese.database.DBUtils.Column;
 import main.java.com.betelguese.database.DBUtils.Keyword;
 import main.java.com.betelguese.database.DBUtils.Table;
+import main.java.com.betelguese.utils.items.NewUser;
 
 /**
  * {@link DBQuery} class for execute query according to each client
@@ -558,11 +559,29 @@ public final class DBQuery implements Table, Column, Keyword {
 
 	public static String getOldPassword(String oldPassword, String adminId) {
 		// TODO Auto-generated method stub
-		System.out.println(SELECT_ALL + ADMINISTRATION_TABLE + WHERE + ADMINISTRATOR_ID
-				+ EQUAL_TO + adminId + COMMA + PASSWORD + EQUAL_TO
-				+ buildEqualCheckString(oldPassword) + STRING_END);
+		System.out.println(SELECT_ALL + ADMINISTRATION_TABLE + WHERE
+				+ ADMINISTRATOR_ID + EQUAL_TO + adminId + COMMA + PASSWORD
+				+ EQUAL_TO + buildEqualCheckString(oldPassword) + STRING_END);
 		return SELECT_ALL + ADMINISTRATION_TABLE + WHERE + ADMINISTRATOR_ID
 				+ EQUAL_TO + adminId + AND + PASSWORD + EQUAL_TO
 				+ buildEqualCheckString(oldPassword) + STRING_END;
+	}
+
+	public static String getOldUsername(String username) {
+		// TODO Auto-generated method stub
+		return SELECT_ALL + ADMINISTRATION_TABLE + WHERE + USERNAME + EQUAL_TO
+				+ buildEqualCheckString(username) + STRING_END;
+	}
+
+	public static String createNewAdmin(String adminName, String username,
+			String password, String adminLevel) {
+
+		return INSERT
+				+ SUPPLY_TABLE
+				+ buildInsertString(ADMINISTRATOR_NAME, USERNAME, PASSWORD,
+						ADMINISTRATOR_LEVEL)
+				+ VALUES
+				+ buildInsertValueString(adminName, username, password,
+						adminLevel) + STRING_END;
 	}
 }
