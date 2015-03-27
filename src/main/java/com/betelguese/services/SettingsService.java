@@ -129,9 +129,22 @@ public class SettingsService implements SettingsRequest, ServiceTag {
 	private String createUserService(NewUser newUser) throws SQLException {
 		resultSet = databaseService.executeQuery(DBQuery.getOldUsername(newUser
 				.getUsername()));
-		resultSet.next();
-		if (resultSet.getString("user_name").equals(newUser.getUsername())) {
-			return serverErrorMessage(new Exception("User already exists."));
+		if (resultSet.next()) {
+			if (resultSet.getString("user_name").equals(newUser.getUsername())) {
+				return serverErrorMessage(new Exception("User already exists."));
+			} else {
+				databaseService
+						.execute(DBQuery.createNewAdmin(newUser.getFristName()
+								+ " " + newUser.getLastName(), newUser
+								.getUsername(), MessageEncryption
+								.encryptMessage(newUser.getPassword()), newUser
+								.getAdministratorLevel()));
+				ServiceMessage serviceMessage = new ServiceMessage(1,
+						MessageBuilder.messageBuilder(SUCCESS_SERVICE,
+								REQUEST_NAME), REQUEST_NAME);
+				Gson gson = new GsonBuilder().create();
+				return gson.toJson(serviceMessage);
+			}
 		} else {
 			databaseService.execute(DBQuery.createNewAdmin(
 					newUser.getFristName() + " " + newUser.getLastName(),
